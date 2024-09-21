@@ -15,13 +15,14 @@ class Assignment(Document):
         
         # Extract username and password
         username = drillbit_settings.username
-        password = drillbit_settings.get
+        password = drillbit_settings.get_password('password')
         current_directory = os.getcwd()
         frappe.msgprint(current_directory)
         # Authenticate with Drillbit API
         base_url = "https://s1.drillbitplagiarismcheck.com"
-        api = DrillbitAPI(base_url)
-        api.authenticate(username, password, frappe)
+        # api = DrillbitAPI(base_url)
+        # api.authenticate(username, password, frappe)
+        # api.create_folder("New Folder")
 
-        frappe.msgprint(f"This is the Uploaded file: {uploaded_file}")
+        frappe.msgprint(f"This is the Uploaded file: {frappe.get_site_path()}{uploaded_file}")
         frappe.msgprint(f"Username: {username}, Password: {password}")
