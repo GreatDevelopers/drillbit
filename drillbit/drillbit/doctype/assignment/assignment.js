@@ -6,3 +6,21 @@
 
 // 	},
 // });
+frappe.ui.form.on("Assignment", {
+    user: function(frm) {  // Replace 'user_field' with the actual field name for user selection
+        const user = frm.doc.user;
+
+        if (user) {
+            frappe.db.get_value("Student", {"user": user}, "name", function(value) {
+                if (value && value.name) {
+                    frm.set_value("student", value.name);  // Replace 'student' with the actual field name for the student
+                    console.log("Linked Student Name:", value.name);
+                } else {
+                    console.log("No student found for this user.");
+                }
+            });
+        } else {
+            frm.set_value("student", ""); // Clear the student field if no user is selected
+        }
+    }
+});

@@ -7,6 +7,14 @@
  "field_order": [
   "section_break_1ppe",
   "amended_from",
+  "user",
+  "student",
+  "student_email",
+  "student_name",
+  "mentor_name",
+  "column_break_ktzy",
+  "title",
+  "assignment_type",
   "upload_assignment"
  ],
  "fields": [
@@ -30,12 +38,66 @@
    "in_list_view": 1,
    "label": "Upload Assignment",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ktzy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "default": "Assignment",
+   "fieldname": "assignment_type",
+   "fieldtype": "Select",
+   "label": "Assignment Type",
+   "options": "Thesis\nDissertation\nArticle\nSynopsis\nAssignment\nProject Work\nResearch Paper\nAnalytical/Business report",
+   "sort_options": 1
+  },
+  {
+   "fieldname": "mentor_name",
+   "fieldtype": "Data",
+   "label": "Mentor Name"
+  },
+  {
+   "default": "User",
+   "fetch_from": "student_name.send_me_a_copy",
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "User",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "user.send_me_a_copy",
+   "fieldname": "student",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Student",
+   "options": "Student",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "student.student_name",
+   "fieldname": "student_name",
+   "fieldtype": "Data",
+   "label": "Student Name"
+  },
+  {
+   "fetch_from": "student.student_email_id",
+   "fieldname": "student_email",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Student Email"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-21 10:55:22.701122",
+ "modified": "2024-09-22 20:50:43.519549",
  "modified_by": "Administrator",
  "module": "Drillbit",
  "name": "Assignment",
@@ -50,6 +112,19 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Student",
    "share": 1,
    "submit": 1,
    "write": 1

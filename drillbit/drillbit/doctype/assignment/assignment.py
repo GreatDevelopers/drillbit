@@ -15,15 +15,28 @@ def get_absolute_path(file_name):
 
 class Assignment(Document):
     def on_save(self):
-        print("hi")
+        drillbit_settings = frappe.get_single("Drillbit Settings")
+        username = drillbit_settings.username
+        password = drillbit_settings.get_password('password')
+        frappe.msgprint(f"Username: {username}, Password: {password}")
 
     def on_submit(self):
         # Assuming upload_assignment is a field of type 'Attach'
         uploaded_file = self.upload_assignment
-        
-        # Retrieve the Drillbit Settings
+        file_path=get_absolute_path(uploaded_file)
         drillbit_settings = frappe.get_single("Drillbit Settings")
-        
+        student_email = self.student
+        student_name = self.student_name
+        mentor_name = self.mentor_name
+        title = self.title
+        assignment_type = self.assignment_type
+        student_email=self.student_email
+
+        # frappe.msgprint(f"Student Email: {student_email}")
+        # frappe.msgprint(f"Student Name: {student_name}")
+        # frappe.msgprint(f"Mentor Name: {mentor_name}")
+        # frappe.msgprint(f"Title: {title}")
+        # frappe.msgprint(f"Assignment Type: {assignment_type}")
         # Extract username and password
         username = drillbit_settings.username
         password = drillbit_settings.get_password('password')
@@ -32,15 +45,15 @@ class Assignment(Document):
         # Authenticate with Drillbit API
         base_url = "https://s1.drillbitplagiarismcheck.com"
         api = DrillbitAPI(base_url)
+        if (api.is_token_valid()):
+            print("Token is valid")
+        else:
+            api.authenticate(username, password, frappe)
         # api.authenticate(username, password, frappe)
         # api.create_folder("New Folder")
-        folder_id=450824
-        file_path=get_absolute_path(uploaded_file)
-        author_name="Amrinder Singh"
-        title="Effects of Air Space in ABF"
-        document_type="Thesis"
-        api.upload_file("Amrinder Singh", "Effects of Air Space in ABF 2004", "Thesis", "amrinder2676@gmail.com", "Amrinder", "YES", "NO", "English", file_path)
+        frappe.msgprint(f"{student_name}, {title},{assignment_type},{student_email} ,{ mentor_name}, {file_path}")
+        # api.upload_file(student_name, title,assignment_type,student_email , mentor_name, "YES", "NO", "English", file_path)
 
 
-        frappe.msgprint(f"This is the Uploaded file: {file_path}")
+        # frappe.msgprint(f"This is the Uploaded file: {file_path}")
         frappe.msgprint(f"Username: {username}, Password: {password}")
