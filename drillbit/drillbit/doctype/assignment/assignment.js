@@ -28,7 +28,7 @@ frappe.ui.form.on("Assignment", "check_plagiarism_status",
     function(frm) {
         const user = frm.doc.user;
         frappe.call({
-            method: "drillbit.drillbit.doctype.assignment.assignment.hello",
+            method: "drillbit.drillbit.doctype.assignment.assignment.refresh_plagiarism_status",
             args: {
             assignment: frm.doc,
             mentor_name: frappe.session.user_fullname,

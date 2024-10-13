@@ -29,7 +29,7 @@ class DrillbitAPI:
             self.jwt_expiry = jwt.decode(self.jwt_token, options={"verify_signature": False})['exp']
 
             print("Authentication successful.")
-            frappe.msgprint("Auth Success!")
+            # frappe.msgprint("Auth Success!")
             print(f"JWT token: {self.jwt_token}")
             print(f"Expires at: {time.ctime(self.jwt_expiry)}")
 
