@@ -35,7 +35,7 @@
    "type": "Link"
   }
  ],
- "modified": "2024-10-13 00:19:04.313451",
+ "modified": "2024-10-13 23:10:25.155569",
  "modified_by": "Administrator",
  "module": "Drillbit",
  "name": "Assignments",
@@ -47,6 +47,15 @@
  "roles": [
   {
    "role": "Student"
+  },
+  {
+   "role": "Head of Department"
+  },
+  {
+   "role": "Mentor"
+  },
+  {
+   "role": "Teacher"
   }
  ],
  "sequence_id": 23.0,

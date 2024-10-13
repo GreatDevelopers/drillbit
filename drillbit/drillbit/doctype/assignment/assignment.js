@@ -32,11 +32,13 @@ frappe.ui.form.on("Assignment", "check_plagiarism_status",
             args: {
             assignment: frm.doc,
             mentor_name: frappe.session.user_fullname,
-            mentor_email: frappe.session.user_email
+            mentor_email: frappe.session.user_email,
+            plagiarism: frm.doc.check_plagiarism,
+            grammar: frm.doc.check_grammar
             },
             callback: function(response) {
-            console.log(response.message);
-            frm.set_value("title", response.message);
+            console.log(response.json);
+            frm.set_value("title", response.json.title);
             }
         });
     });

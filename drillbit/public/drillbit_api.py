@@ -9,7 +9,7 @@ from requests.exceptions import RequestException
 class DrillbitAPI:
     def __init__(self, base_url):
         self.base_url = base_url
-        self.jwt_token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXJpbmRlcjIxMTUwMTJAZ25kZWMuYWMuaW4iLCJ1c2VyX2lkIjoyMzMzNDcsImV4cCI6MTcyNjk1MDM3OCwiaWF0IjoxNzI2OTMyMzc4fQ.AvgCJDCy90kK1FyRQi4s6iwr2Ha_tsrAy-7qqH3MoyC-g-ZAvfVOKh0rOgXcaL57jj1BvsN_s1qlX7i0ZGlwSw"
+        self.jwt_token = " "
         self.jwt_expiry = 0
 
     def authenticate(self, username, password, frappe):
@@ -241,8 +241,8 @@ class DrillbitAPI:
         except RequestException as e:
             print(f"Failed to get folders list: {e}")
 
-    def get_submissions_list(self, folder_id, page=0, size=25, field='paper_id', order_by='desc'):
-        url = f"{self.base_url}/pro/folder/{folder_id}/submissions?page={page}&size={size}&field={field}&orderBy={order_by}"
+    def get_submissions_list(self, folder_id, paper_id):
+        url = f"{self.base_url}/pro/folder/{folder_id}/submissions?paperId={paper_id}"
         headers = self.get_headers()
 
         try:
@@ -252,6 +252,7 @@ class DrillbitAPI:
             response_data = response.json()
             print("Submissions list retrieved successfully.")
             print(json.dumps(response_data, indent=4))
+            return response_data
 
         except RequestException as e:
             print(f"Failed to get submissions list: {e}")
