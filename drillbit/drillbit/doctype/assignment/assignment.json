@@ -1,7 +1,6 @@
 {
  "actions": [],
- "allow_rename": 1,
- "autoname": "format:{title}-{student_name}",
+ "autoname": "format:{title}-{student_name} - {data_npl} - {####}",
  "creation": "2024-09-21 10:18:38.240467",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -12,7 +11,7 @@
   "student",
   "student_email",
   "student_name",
-  "student_roll_number",
+  "data_npl",
   "column_break_ktzy",
   "title",
   "assignment_type",
@@ -56,7 +55,8 @@
   {
    "fieldname": "title",
    "fieldtype": "Data",
-   "label": "Title"
+   "label": "Title",
+   "reqd": 1
   },
   {
    "default": "Assignment",
@@ -98,12 +98,6 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Student Email"
-  },
-  {
-   "fetch_from": "student.user",
-   "fieldname": "student_roll_number",
-   "fieldtype": "Data",
-   "label": "Student Roll Number"
   },
   {
    "fieldname": "check_plagiarism_status",
@@ -159,12 +153,19 @@
   {
    "fieldname": "column_break_werq",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "user",
+   "fetch_from": "user.username",
+   "fieldname": "data_npl",
+   "fieldtype": "Data",
+   "label": "Student Userid"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-13 23:19:52.618767",
+ "modified": "2024-10-14 02:57:52.403702",
  "modified_by": "Administrator",
  "module": "Drillbit",
  "name": "Assignment",

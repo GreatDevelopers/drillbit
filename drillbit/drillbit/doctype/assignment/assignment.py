@@ -16,7 +16,7 @@ def handleUpload(doc, pliagiarism, grammar):
         user = frappe.session.user
         mentor_name = frappe.utils.get_fullname(user)
         mentor_email = frappe.db.get_value("User", user, "email")
-        frappe.msgprint(f"{mentor_name} {mentor_email}")
+        # frappe.msgprint(f"{mentor_name} {mentor_email}")
 
         username = frappe.get_single("Drillbit Settings").username
         password = frappe.get_single("Drillbit Settings").get_password('password')
@@ -33,18 +33,18 @@ def handleUpload(doc, pliagiarism, grammar):
             check_grammar = "YES"
         else:
             check_grammar = "NO"
-        frappe.msgprint(f"Plagiarism Check: {check_plagiarism}, Grammar Check: {check_grammar}")
+        # frappe.msgprint(f"Plagiarism Check: {check_plagiarism}, Grammar Check: {check_grammar}")
 
 
         api = DrillbitAPI(base_url)
-        frappe.msgprint(f"jwt_token: {api.jwt_token}")
+        # frappe.msgprint(f"jwt_token: {api.jwt_token}")
         if (api.is_token_valid()):
             print("Token is valid")
         else:
             api.authenticate(username, password, frappe)
         if str(doc.paper_id) == '0':
             print("nel")
-            frappe.msgprint(f"Uploading file: {file_path} for plagiarism check")
+            # frappe.msgprint(f"Uploading file: {file_path} for plagiarism check")
             uploaded_file = api.upload_file(student_name, title,assignment_type,"amrinder2676@gmail.com", "Amrinder Singh", check_plagiarism, check_grammar, "English", file_path)
             if uploaded_file.get("status") == 200:
                 paper_id = uploaded_file["submissions"]["paper_id"]
@@ -57,7 +57,7 @@ def handleUpload(doc, pliagiarism, grammar):
                 frappe.msgprint("Upload failed.")
                 print(f"Upload failed with status:", uploaded_file.get("status"), "and message:", uploaded_file.get("message"))
         else:
-            frappe.msgprint(f"File already uploaded for plagiarism check. Result can be viewed at: {base_url}/drillbit-analysis/analysis/{doc.paper_id}/{doc.d_key}/{api.jwt_token}")
+            frappe.msgprint(f"File already uploaded for plagiarism check. Result can be viewed at: <a href=\"{base_url}/drillbit-analysis/analysis/{doc.paper_id}/{doc.d_key}/{api.jwt_token}\">Here</a>")
 
 
 @frappe.whitelist()

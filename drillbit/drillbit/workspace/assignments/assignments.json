@@ -1,7 +1,7 @@
 {
  "app": "frappe",
  "charts": [],
- "content": "[{\"id\":\"sKHfl0lQ5_\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 16px;\\\">Assignments</span>\",\"col\":12}},{\"id\":\"9MsxgzqTwZ\",\"type\":\"card\",\"data\":{\"card_name\":\"Assignment List\",\"col\":4}}]",
+ "content": "[{\"id\":\"sKHfl0lQ5_\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 16px;\\\">Assignments</span>\",\"col\":12}},{\"id\":\"9MsxgzqTwZ\",\"type\":\"card\",\"data\":{\"card_name\":\"Assignment List\",\"col\":4}},{\"id\":\"gnGWavMujl\",\"type\":\"card\",\"data\":{\"card_name\":\"API Credentials\",\"col\":4}}]",
  "creation": "2024-10-12 23:51:19.344013",
  "custom_blocks": [],
  "docstatus": 0,
@@ -33,10 +33,29 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "API Credentials",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Drillbit Settings",
+   "link_count": 0,
+   "link_to": "Drillbit Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-10-13 23:10:25.155569",
- "modified_by": "Administrator",
+ "modified": "2024-10-14 02:45:04.681007",
+ "modified_by": "admin@amr.sytes.net",
  "module": "Drillbit",
  "name": "Assignments",
  "number_cards": [],
