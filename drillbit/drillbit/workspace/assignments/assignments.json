@@ -1,0 +1,56 @@
+{
+ "app": "frappe",
+ "charts": [],
+ "content": "[{\"id\":\"sKHfl0lQ5_\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 16px;\\\">Assignments</span>\",\"col\":12}},{\"id\":\"9MsxgzqTwZ\",\"type\":\"card\",\"data\":{\"card_name\":\"Assignment List\",\"col\":4}}]",
+ "creation": "2024-10-12 23:51:19.344013",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "clipboard",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Assignments",
+ "link_type": "DocType",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Assignment List",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Assignment",
+   "link_count": 0,
+   "link_to": "Assignment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2024-10-13 00:19:04.313451",
+ "modified_by": "Administrator",
+ "module": "Drillbit",
+ "name": "Assignments",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "Education",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Student"
+  }
+ ],
+ "sequence_id": 23.0,
+ "shortcuts": [],
+ "title": "Assignments",
+ "type": "Workspace"
+}

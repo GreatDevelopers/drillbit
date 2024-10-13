@@ -24,3 +24,16 @@ frappe.ui.form.on("Assignment", {
         }
     }
 });
+frappe.ui.form.on("Assignment", "check_plagiarism_status",
+    function(frm) {
+        const user = frm.doc.user;
+        frappe.call({
+            method: "drillbit.drillbit.doctype.assignment.assignment.hello",
+            args: {
+            assignment: frm.doc
+            },
+            callback: function(response) {
+            console.log(response.message);
+            }
+        });
+    });

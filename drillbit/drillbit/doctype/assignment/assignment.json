@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:{title}-{student_name}",
  "creation": "2024-09-21 10:18:38.240467",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -11,11 +12,12 @@
   "student",
   "student_email",
   "student_name",
-  "mentor_name",
+  "student_roll_number",
   "column_break_ktzy",
   "title",
   "assignment_type",
-  "upload_assignment"
+  "upload_assignment",
+  "check_plagiarism_status"
  ],
  "fields": [
   {
@@ -57,11 +59,6 @@
    "sort_options": 1
   },
   {
-   "fieldname": "mentor_name",
-   "fieldtype": "Data",
-   "label": "Mentor Name"
-  },
-  {
    "default": "User",
    "fetch_from": "student_name.send_me_a_copy",
    "fieldname": "user",
@@ -73,6 +70,7 @@
   },
   {
    "fetch_from": "user.send_me_a_copy",
+   "fetch_if_empty": 1,
    "fieldname": "student",
    "fieldtype": "Link",
    "hidden": 1,
@@ -92,15 +90,29 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Student Email"
+  },
+  {
+   "fetch_from": "student.user",
+   "fieldname": "student_roll_number",
+   "fieldtype": "Data",
+   "label": "Student Roll Number"
+  },
+  {
+   "fieldname": "check_plagiarism_status",
+   "fieldtype": "Button",
+   "label": "Check Plagiarism status",
+   "options": "Test\nWorks",
+   "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-22 20:50:43.519549",
+ "modified": "2024-10-13 13:57:53.570447",
  "modified_by": "Administrator",
  "module": "Drillbit",
  "name": "Assignment",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -121,6 +133,7 @@
    "delete": 1,
    "email": 1,
    "export": 1,
+   "if_owner": 1,
    "print": 1,
    "read": 1,
    "report": 1,
@@ -128,9 +141,71 @@
    "share": 1,
    "submit": 1,
    "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Head of Department",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Teacher",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Mentor",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
   }
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [
+  {
+   "color": "Blue",
+   "title": "Pending"
+  },
+  {
+   "color": "Blue",
+   "title": "In Review"
+  },
+  {
+   "color": "Blue",
+   "title": "Approved"
+  }
+ ],
+ "track_changes": 1
 }
