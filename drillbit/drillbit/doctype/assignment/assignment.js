@@ -30,10 +30,13 @@ frappe.ui.form.on("Assignment", "check_plagiarism_status",
         frappe.call({
             method: "drillbit.drillbit.doctype.assignment.assignment.hello",
             args: {
-            assignment: frm.doc
+            assignment: frm.doc,
+            mentor_name: frappe.session.user_fullname,
+            mentor_email: frappe.session.user_email
             },
             callback: function(response) {
             console.log(response.message);
+            frm.set_value("title", response.message);
             }
         });
     });

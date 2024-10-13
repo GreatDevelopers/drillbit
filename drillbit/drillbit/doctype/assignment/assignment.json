@@ -13,16 +13,26 @@
   "student_email",
   "student_name",
   "student_roll_number",
+  "paper_id",
+  "d_key",
   "column_break_ktzy",
   "title",
   "assignment_type",
   "upload_assignment",
-  "check_plagiarism_status"
+  "plagiarism_section",
+  "check_plagiarism",
+  "check_grammar",
+  "column_break_werq",
+  "check_plagiarism_status",
+  "plagiarism_status",
+  "similarity_report",
+  "summary_report"
  ],
  "fields": [
   {
    "fieldname": "section_break_1ppe",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Assignment"
   },
   {
    "fieldname": "amended_from",
@@ -100,15 +110,74 @@
   {
    "fieldname": "check_plagiarism_status",
    "fieldtype": "Button",
-   "label": "Check Plagiarism status",
+   "label": "Refresh Plagiarism status",
    "options": "Test\nWorks",
    "permlevel": 1
+  },
+  {
+   "default": "No",
+   "fieldname": "check_plagiarism",
+   "fieldtype": "Check",
+   "label": "Check Plagiarism",
+   "options": "Yes\nNo",
+   "permlevel": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "check_grammar",
+   "fieldtype": "Check",
+   "label": "Check Grammar",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "similarity_report",
+   "fieldtype": "Attach",
+   "label": "Similarity Report",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "summary_report",
+   "fieldtype": "Attach",
+   "label": "Summary Report",
+   "length": 1,
+   "permlevel": 1
+  },
+  {
+   "fieldname": "paper_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "paper_id"
+  },
+  {
+   "fieldname": "d_key",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "d_key"
+  },
+  {
+   "fieldname": "plagiarism_section",
+   "fieldtype": "Section Break",
+   "label": "Plagiarism"
+  },
+  {
+   "fieldname": "column_break_werq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Not checked",
+   "fieldname": "plagiarism_status",
+   "fieldtype": "Data",
+   "label": "Plagiarism Status",
+   "options": "Not checked",
+   "permlevel": 1,
+   "placeholder": "Not checked",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-13 13:57:53.570447",
+ "modified": "2024-10-13 18:46:57.925281",
  "modified_by": "Administrator",
  "module": "Drillbit",
  "name": "Assignment",
