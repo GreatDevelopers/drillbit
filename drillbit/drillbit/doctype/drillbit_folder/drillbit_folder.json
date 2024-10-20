@@ -1,0 +1,196 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "auto_name",
+ "creation": "2024-10-15 15:11:31.560736",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "test_section",
+  "folder_details_column",
+  "folder_name",
+  "folder_id",
+  "title",
+  "created_at",
+  "email_notification",
+  "compare_against_section",
+  "student_papers",
+  "journals_and_publishers",
+  "internet_or_web",
+  "institution_repository",
+  "column_break_yrxm",
+  "exclude_reference__bibliography",
+  "exclude_small_sources",
+  "exclude_quotes",
+  "grammar_check",
+  "section_break_mjoi",
+  "exclude_phrases"
+ ],
+ "fields": [
+  {
+   "fieldname": "folder_details_column",
+   "fieldtype": "Column Break",
+   "print_width": "1500px",
+   "width": "1500px"
+  },
+  {
+   "bold": 1,
+   "columns": 1,
+   "fieldname": "folder_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Folder Name",
+   "print_width": "1000px",
+   "reqd": 1,
+   "width": "1000px"
+  },
+  {
+   "default": "0",
+   "fieldname": "exclude_reference__bibliography",
+   "fieldtype": "Check",
+   "label": "Exclude Reference / Bibliography"
+  },
+  {
+   "default": "0",
+   "fieldname": "exclude_quotes",
+   "fieldtype": "Check",
+   "label": "Exclude Quotes"
+  },
+  {
+   "default": "0",
+   "fieldname": "exclude_small_sources",
+   "fieldtype": "Check",
+   "label": "Exclude small sources"
+  },
+  {
+   "fieldname": "exclude_phrases",
+   "fieldtype": "Small Text",
+   "label": "Phrases to Exclude (one per line)"
+  },
+  {
+   "default": "1",
+   "fieldname": "email_notification",
+   "fieldtype": "Check",
+   "label": "Email Notification"
+  },
+  {
+   "default": "1",
+   "fieldname": "student_papers",
+   "fieldtype": "Check",
+   "label": "Student Papers"
+  },
+  {
+   "default": "1",
+   "fieldname": "journals_and_publishers",
+   "fieldtype": "Check",
+   "label": "Journals and publishers"
+  },
+  {
+   "default": "1",
+   "fieldname": "internet_or_web",
+   "fieldtype": "Check",
+   "label": "Internet or Web"
+  },
+  {
+   "default": "1",
+   "fieldname": "institution_repository",
+   "fieldtype": "Check",
+   "label": "Institution Repository"
+  },
+  {
+   "fieldname": "folder_id",
+   "fieldtype": "Int",
+   "label": "Folder ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Title"
+  },
+  {
+   "fieldname": "created_at",
+   "fieldtype": "Data",
+   "label": "Created at",
+   "read_only": 1
+  },
+  {
+   "fieldname": "test_section",
+   "fieldtype": "Section Break",
+   "label": "Folder Details"
+  },
+  {
+   "fieldname": "compare_against_section",
+   "fieldtype": "Section Break",
+   "label": "Compare Against"
+  },
+  {
+   "fieldname": "column_break_yrxm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_mjoi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "grammar_check",
+   "fieldtype": "Check",
+   "label": "Grammar Check"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-20 13:16:38.006824",
+ "modified_by": "Administrator",
+ "module": "Drillbit",
+ "name": "Drillbit Folder",
+ "naming_rule": "By script",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Teacher",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Mentor",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Head of Department",
+   "share": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title"
+}

@@ -42,24 +42,42 @@ class DrillbitAPI:
             return False
         return True
 
-    def create_folder(self, folder_name):
+    def create_folder(
+                    self,
+                    folder_name,
+                    exclude_reference="NO",
+                    exclude_quotes="NO",
+                    exclude_small_sources="NO",
+                    grammar_check="NO",
+                    exclude_phrases="NO",
+                    db_studentpaper="YES",
+                    db_publications="YES",
+                    db_internet="YES",
+                    institution_repository="YES",
+                    email_notifications="NO",
+                    exclude_threshold=14,
+                    phrases=None
+                ):
         url = f"{self.base_url}/pro/folder"
         headers = self.get_headers()
         
         data = {
             "folder_name": folder_name,
-            "exclude_reference": "NO",
-            "exclude_quotes": "NO",
-            "exclude_small_sources": "NO",
-            "grammar_check": "NO",
-            "exclude_phrases": "NO",
-            "db_studentpaper": "YES",
-            "db_publications": "YES",
-            "db_internet": "YES",
-            "institution_repository": "YES",
-            "email_notifications": "NO",
-            "exclude_threshold": 14,
+            "exclude_reference": exclude_reference,
+            "exclude_quotes": exclude_quotes,
+            "exclude_small_sources": exclude_small_sources,
+            "grammar_check": grammar_check,
+            "exclude_phrases": exclude_phrases,
+            "db_studentpaper": db_studentpaper,
+            "db_publications": db_publications,
+            "db_internet": db_internet,
+            "institution_repository": institution_repository,
+            "email_notifications": email_notifications,
+            "exclude_threshold": exclude_threshold,
         }
+
+        if exclude_phrases == "YES" and phrases:
+            data["phrases"] = phrases
 
         # Dump the entire request
         request_info = f"""
@@ -73,14 +91,7 @@ class DrillbitAPI:
             response = requests.post(url, headers=headers, json=data)
             response.raise_for_status()  # Raise an error for bad responses
 
-            response_data = response.json()
-            # Dump the response
-            response_info = f"""
-            Response Status Code: {response.status_code}
-            Response Headers: {json.dumps(dict(response.headers), indent=2)}
-            Response Body: {json.dumps(response_data, indent=2)}
-            """
-            print(response_info)
+            return response
 
         except RequestException as e:
             print(f"Failed to create folder: {e}")
@@ -92,6 +103,7 @@ class DrillbitAPI:
                 Response Body: {response.text}
                 """
                 print(error_response_info)
+                return response
 
     def get_headers(self):
         return {
@@ -111,8 +123,8 @@ class DrillbitAPI:
             'sec-ch-ua-platform': '"Windows"',
         }
 
-    def upload_file(self, author_name, title, document_type, guide_email, guide_name, plagiarism_check, grammar_check, language, file_path):
-        url = f"{self.base_url}/files/folder/450824/singleFile"
+    def upload_file(self, author_name, title, document_type, guide_email, guide_name, plagiarism_check, grammar_check, language, file_path, folder_id):
+        url = f"{self.base_url}/files/folder/{folder_id}/singleFile"
         
         # Prepare the files and data for the request
         files = {
@@ -271,42 +283,78 @@ class DrillbitAPI:
         except RequestException as e:
             print(f"Failed to delete folder: {e}")
 
-    def edit_folder(self, folder_id, folder_name):
+    def edit_folder(
+                    self,
+                    folder_id,
+                    folder_name,
+                    exclude_reference="NO",
+                    exclude_quotes="NO",
+                    exclude_small_sources="NO",
+                    grammar_check="NO",
+                    exclude_phrases="NO",
+                    db_studentpaper="YES",
+                    db_publications="YES",
+                    db_internet="YES",
+                    institution_repository="YES",
+                    email_notifications="NO",
+                    exclude_threshold=14,
+                    phrases=None
+
+                ):
+        
         url = f"{self.base_url}/pro/folder/{folder_id}"
         headers = self.get_headers()
+        
         data = {
             "folder_name": folder_name,
-            "exclude_reference": "NO",
-            "exclude_quotes": "NO",
-            "exclude_small_sources": "NO",
-            "grammar_check": "NO",
-            "db_studentpaper": "YES",
-            "db_publications": "YES",
-            "db_internet": "YES",
-            "institution_repository": "YES",
-            "exclude_phrases": "YES",
-            "phrases": {
-                "p1": "phrases 1",
-                "p2": "phrases 2",
-                "p3": "Phrases 3"
-            }
+            "exclude_reference": exclude_reference,
+            "exclude_quotes": exclude_quotes,
+            "exclude_small_sources": exclude_small_sources,
+            "grammar_check": grammar_check,
+            "exclude_phrases": exclude_phrases,
+            "db_studentpaper": db_studentpaper,
+            "db_publications": db_publications,
+            "db_internet": db_internet,
+            "institution_repository": institution_repository,
+            "email_notifications": email_notifications,
+            "exclude_threshold": exclude_threshold,
         }
+        if exclude_phrases == "YES" and phrases:
+            data["phrases"] = phrases
+
+        # Dump the entire request
+        request_info = f"""
+        Request URL: {url}
+        Request Headers: {json.dumps(headers, indent=2)}
+        Request Data: {json.dumps(data, indent=2)}
+        """
+        print(request_info)
 
         try:
             response = requests.put(url, headers=headers, json=data)
-            response.raise_for_status()
+            response.raise_for_status()  # Raise an error for bad responses
 
-            response_data = response.json()
-            status = response_data['status']
-            message = response_data['message']
-            timestamp = response_data['timeStamp']
-
-            print(f"Folder edit status: {status}")
-            print(f"Message: {message}")
-            print(f"Timestamp: {timestamp}")
+            # response_data = response.json()
+            # # Dump the response
+            # response_info = f"""
+            # Response Status Code: {response.status_code}
+            # Response Headers: {json.dumps(dict(response.headers), indent=2)}
+            # Response Body: {json.dumps(response_data, indent=2)}
+            # """
+            # print(response_info)
+            return response
 
         except RequestException as e:
             print(f"Failed to edit folder: {e}")
+            if response is not None:
+                # Dump the error response
+                error_response_info = f"""
+                Response Status Code: {response.status_code}
+                Response Headers: {json.dumps(dict(response.headers), indent=2)}
+                Response Body: {response.text}
+                """
+                print(error_response_info)
+                return response
 
     def delete_submission(self, folder_id, paper_id):
         url = f"{self.base_url}/pro/folder/{folder_id}/submissions?paperId={paper_id}"

@@ -21,6 +21,7 @@
   "check_grammar",
   "paper_id",
   "d_key",
+  "folder",
   "column_break_werq",
   "check_plagiarism_status",
   "summary_report"
@@ -134,7 +135,8 @@
    "hidden": 1,
    "label": "paper_id",
    "permlevel": 1,
-   "placeholder": "0"
+   "placeholder": "0",
+   "read_only": 1
   },
   {
    "default": "0",
@@ -143,7 +145,8 @@
    "hidden": 1,
    "label": "d_key",
    "permlevel": 1,
-   "placeholder": "0"
+   "placeholder": "0",
+   "read_only": 1
   },
   {
    "fieldname": "plagiarism_section",
@@ -160,12 +163,21 @@
    "fieldname": "data_npl",
    "fieldtype": "Data",
    "label": "Student Userid"
+  },
+  {
+   "fieldname": "folder",
+   "fieldtype": "Link",
+   "label": "Folder",
+   "options": "Drillbit Folder",
+   "permlevel": 1,
+   "placeholder": "Select Folder",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-14 02:57:52.403702",
+ "modified": "2024-10-20 13:00:32.865713",
  "modified_by": "Administrator",
  "module": "Drillbit",
  "name": "Assignment",
