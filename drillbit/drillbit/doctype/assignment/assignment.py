@@ -5,6 +5,28 @@ import frappe
 from frappe.model.document import Document
 from assets.drillbit.drillbit_api import DrillbitAPI
 
+
+def attach_file_to_assignment(file_path, assignment_name):
+    # Create a new File document
+    file_doc = frappe.get_doc({
+        "doctype": "File",
+        "file_name": file_path.split('/')[-1],  # Get the file name
+        "file_url": f"/private/files/{file_path.split('/')[-1]}",  # URL of the file
+        "is_private": 1,  # Set to 1 if the file is private
+        "attached_to_doctype": "Assignment",  # Specify the Assignment doctype
+        "attached_to_name": assignment_name,  # Specify the name or ID of the Assignment document
+    })
+    
+    # Save the file document
+    file_doc.insert()
+    frappe.db.commit()
+    
+    # Link the file to the report field in the Assignment doctype
+    assignment_doc = frappe.get_doc("Assignment", assignment_name)
+    assignment_doc.report = file_doc.file_url  # Assuming 'report' is an Attach field
+    assignment_doc.save()
+    return file_doc.file_url
+
 def get_absolute_path(file_name):
     if(file_name.startswith('/files/')):
         file_path = f'{frappe.utils.get_bench_path()}/sites/{frappe.utils.get_site_base_path()[2:]}/public{file_name}'
@@ -53,13 +75,22 @@ def handleUpload(doc, pliagiarism, grammar):
                 doc.paper_id = int(paper_id)
                 doc.d_key = str(d_key)
                 doc.save()
-                frappe.msgprint(f"File uploaded successfully for plagiarism check. Result can be viewed at: <a href=\"{base_url}/drillbit-analysis/analysis/{doc.paper_id}/{doc.d_key}/{api.jwt_token}\">Here</a>")
+                frappe.msgprint(f"File uploaded successfully for plagiarism check. Please check back after some time for the results.")
             else:
                 message = uploaded_file.get("message")
                 frappe.msgprint(f"Upload failed. {message}. Please contact the administrator.")
         else:
-            frappe.msgprint(f"File already uploaded for plagiarism check. Result can be viewed at: <a href=\"{base_url}/drillbit-analysis/analysis/{doc.paper_id}/{doc.d_key}/{api.jwt_token}\">Here</a>")
-
+            site_path = os.path.abspath(frappe.utils.get_site_path()) + '/private/files/'
+            file_url = ""
+            if(doc.report != None):
+                file_url = doc.report
+            else:
+                file = api.download_file(doc.paper_id, doc.d_key, site_path)
+                if (file != None):
+                    file_url = attach_file_to_assignment(file, doc.name)
+                else:
+                    frappe.throw("Download failed. Please wait until results or contact the administrator if it's been too long.")
+            frappe.msgprint(f"File already uploaded for plagiarism check. Result can be viewed at: <a href=\"{file_url}\">Here</a> If not visble check back later.")
 
 @frappe.whitelist()
 def refresh_plagiarism_status(assignment, mentor_name, mentor_email, plagiarism, grammar):

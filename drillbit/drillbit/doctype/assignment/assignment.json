@@ -25,7 +25,7 @@
   "folder",
   "column_break_werq",
   "check_plagiarism_status",
-  "summary_report"
+  "report"
  ],
  "fields": [
   {
@@ -123,13 +123,6 @@
    "permlevel": 1
   },
   {
-   "fieldname": "summary_report",
-   "fieldtype": "Attach",
-   "label": "Summary Report",
-   "length": 1,
-   "permlevel": 1
-  },
-  {
    "default": "0",
    "fieldname": "paper_id",
    "fieldtype": "Int",
@@ -182,12 +175,20 @@
    "permlevel": 1,
    "placeholder": "0",
    "read_only": 1
+  },
+  {
+   "fieldname": "report",
+   "fieldtype": "Attach",
+   "label": "Report",
+   "options": "File",
+   "permlevel": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-20 18:33:57.331942",
+ "modified": "2024-10-20 21:57:17.207085",
  "modified_by": "Administrator",
  "module": "Drillbit",
  "name": "Assignment",

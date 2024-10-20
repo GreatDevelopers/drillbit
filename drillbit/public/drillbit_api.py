@@ -222,21 +222,20 @@ class DrillbitAPI:
         except RequestException as e:
             print(f"Failed to create submission: {e}")
 
-    def download_file(self, paper_id, d_key):
+    def download_file(self, paper_id, d_key, folder_path):
         url = f"{self.base_url}/analysis-gateway/api/download2/{paper_id}/{d_key}"
         headers = {'Authorization': f'Bearer {self.jwt_token}'}
 
-        try:
-            response = requests.get(url, headers=headers)
-            response.raise_for_status()
+        response = requests.get(url, headers=headers)
+        if (response.status_code != 200):
+            return None
+        file_path = os.path.join(folder_path, f"{paper_id}.pdf")
+        with open(file_path, 'wb') as file:
+            file.write(response.content)
+        print(f"File downloaded successfully as {file_path}")
+        return file_path
 
-            with open(f"{paper_id}.pdf", 'wb') as file:
-                file.write(response.content)
 
-            print(f"File downloaded successfully as {paper_id}.pdf")
-
-        except RequestException as e:
-            print(f"Failed to download file: {e}")
 
     def get_folders_list(self, page=0, size=25, field='ass_id', order_by='desc'):
         url = f"{self.base_url}/pro/folders?page={page}&size={size}&field={field}&orderBy={order_by}"
