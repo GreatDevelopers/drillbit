@@ -170,14 +170,13 @@
    "label": "Folder",
    "options": "Drillbit Folder",
    "permlevel": 1,
-   "placeholder": "Select Folder",
-   "reqd": 1
+   "placeholder": "Select Folder"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-20 13:00:32.865713",
+ "modified": "2024-10-20 17:12:26.794225",
  "modified_by": "Administrator",
  "module": "Drillbit",
  "name": "Assignment",

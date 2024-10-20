@@ -23,6 +23,7 @@ def handleUpload(doc, pliagiarism, grammar):
         student_name = doc.student_name
         title = doc.title
         assignment_type = doc.assignment_type
+        frappe.msgprint(doc.folder)
         folder_id = str(frappe.get_doc("Drillbit Folder", doc.folder).folder_id)
         base_url = "https://s1.drillbitplagiarismcheck.com"
         if int(pliagiarism) == 1:
@@ -53,12 +54,46 @@ def handleUpload(doc, pliagiarism, grammar):
                 doc.paper_id = int(paper_id)
                 doc.d_key = str(d_key)
                 doc.save()
-                frappe.msgprint(f"File uploaded successfully for plagiarism check. Result can be viewed at: <a href=\"{base_url}/drillbit-analysis/analysis/{doc.paper_id}/{doc.d_key}/{api.jwt_token}\">Here</a>")
+                frappe.msgprint(f"File uploaded successfully for plagiarism check. Result can be viewed at: <a href=\"{base_url}/analysis-gateway/api/download2/{doc.paper_id}/{doc.d_key}/{api.jwt_token}\">Here</a>")
             else:
-                frappe.msgprint("Upload failed.")
-                print(f"Upload failed with status:", uploaded_file.get("status"), "and message:", uploaded_file.get("message"))
+                message = uploaded_file.get("message")
+                frappe.msgprint(f"Upload failed. {message}. Please contact the administrator.")
         else:
-            frappe.msgprint(f"File already uploaded for plagiarism check. Result can be viewed at: <a href=\"{base_url}/drillbit-analysis/analysis/{doc.paper_id}/{doc.d_key}/{api.jwt_token}\">Here</a>")
+            frappe.msgprint(f"""
+                File already uploaded for plagiarism check. Result can be viewed 
+                <a href="#" id="download-link">Here</a>.
+                <script>
+                    document.getElementById('download-link').onclick = function(event) {{
+                        event.preventDefault();
+                        
+                        fetch('https://{base_url}/analysis-gateway/api/download2/{doc.paper_id}/{doc.d_key}', {{
+                            method: 'GET',
+                            headers: {{
+                                'Authorization': 'Bearer {api.jwt_token}',
+                                'Connection': 'keep-alive'
+                            }}
+                        }})
+                        .then(response => {{
+                            if (!response.ok) {{
+                                throw new Error('Network response was not ok');
+                            }}
+                            return response.blob();
+                        }})
+                        .then(blob => {{
+                            const url = window.URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = '{doc.paper_id}.pdf'; // Set the filename
+                            document.body.appendChild(a);
+                            a.click();
+                            a.remove();
+                        }})
+                        .catch(error => {{
+                            frappe.msgprint(`Error: {{error.message}}`);
+                        }});
+                    }};
+                </script>
+            """)
 
 
 @frappe.whitelist()

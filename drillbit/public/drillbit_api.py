@@ -170,10 +170,10 @@ class DrillbitAPI:
         print("----------------------------------------------------------------------------------------")
         
         # Handle the response
-        if response.status_code == 200:
-            return response.json()  # Assuming the API returns JSON
-        else:
-            response.raise_for_status()  # Raise an error for bad responses
+        return response.json()  # Assuming the API returns JSON
+        # if response.status_code == 200:
+        # else:
+        #     response.raise_for_status()  # Raise an error for bad responses
 
 
     def get_headers(self):
