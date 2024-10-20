@@ -168,7 +168,6 @@
    "fieldname": "folder",
    "fieldtype": "Link",
    "label": "Folder",
-   "mandatory_depends_on": "frm.doc.status==='Submitted'",
    "options": "Drillbit Folder",
    "permlevel": 1,
    "placeholder": "Select Folder"
@@ -187,7 +186,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-10-20 18:13:44.739079",
+ "modified": "2024-10-20 18:32:55.762406",
  "modified_by": "Administrator",
  "module": "Drillbit",
  "name": "Assignment",
